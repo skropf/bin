@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+# Converts jpg to pdf with ghostscript
+# First argument: jpg file
+# Second argument: pdf file
+#
+
+gs -sDEVICE=pdfwrite -o $2 /usr/share/ghostscript/9.27/lib/viewjpeg.ps -c "($1) viewJPEG showpage"
