@@ -1,8 +1,11 @@
 #!/bin/bash
+#
+# script for the university vpn service
+#
 
 if [ _$1 == _ ]
 then
-	echo "Usage: ./vpn.sh [<login> [all]|info|kill]"
+	echo "Usage: vpn <login> [all]|info|kill"
 fi
 
 if [[ _$1 =~ _[a-z] ]]
