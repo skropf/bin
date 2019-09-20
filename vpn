@@ -11,7 +11,7 @@ then
 	echo "Usage: $0 status ... shows current connection"
 fi
 
-if [[ "_$1" != "_uni" ]]
+if [[ "_$1" == "_uni" ]]
 then
 	if [[ _$2 =~ _[a-z] ]]
 	then
