@@ -1,26 +1,42 @@
 #!/bin/bash
 #
-# script for the university vpn service
+# script for managing vpn services
 #
 
-if [ _$1 == _ ]
+
+if [[ "_$1" == "_" ]]
 then
-	echo "Usage: vpn <login> [all]|info|kill"
+	echo "Usage: $0 <endpoint> <internal|external> <on|off>"
+	echo "Usage: $0 uni <user|kill|info> <all(only with user)> (for university use)"
+	echo "Usage: $0 status ... shows current connection"
 fi
 
-if [[ _$1 =~ _[a-z] ]]
+if [[ "_$1" != "_uni" ]]
 then
-	if [ _$2 == '_all' ]
+	if [[ _$2 =~ _[a-z] ]]
 	then
-		f5fpc -s -t vpn.univie.ac.at:8443 -u $1
-	elif [ _$1 == '_kill' ]
+		if [ _$3 == '_all' ]
+		then
+			f5fpc -s -t vpn.univie.ac.at:8443 -u $1
+		elif [ _$2 == '_kill' ]
+		then
+			f5fpc -o
+		elif [ _$2 == '_info' ]
+		then
+			f5fpc --info
+		else
+			f5fpc -s -t vpn.univie.ac.at -u $1
+		fi
+	fi
+	
+else
+	if [[ "_$3" == "_on" ]]
 	then
-		f5fpc -o
-	elif [ _$1 == '_info' ]
+		sudo systemctl start wg-quick@$1-$2;
+	elif [[ "_$3" == "_off" ]]
 	then
-		f5fpc --info
+		sudo systemctl stop wg-quick@$1-$2;
 	else
-		f5fpc -s -t vpn.univie.ac.at -u $1
+		echo "Usage: $0 $1 $2 <on|off>";
 	fi
 fi
-
