@@ -37,6 +37,6 @@ else
 	then
 		sudo systemctl stop wg-quick@$1-$2;
 	else
-		echo "Usage: $0 $1 $2 <on|off>";
+		echo "Usage: $0 <endpoint> <internal|external> <on|off>";
 	fi
 fi
