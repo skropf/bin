@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# merges two or more pdf
+gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=$1.pdf ${@:2:${#@}}
