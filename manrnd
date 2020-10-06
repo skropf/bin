@@ -1,0 +1,18 @@
+#!/bin/bash
+
+IFS=':'
+
+for p in $PATH
+do
+	IFS=$'\n'
+	
+	new_execs=($(ls $p))
+	all_execs=("${all_execs[@]}" "${new_execs[@]}")
+	
+	IFS=':'
+done
+
+len=${#all_execs[@]}
+choice=$(((5*RANDOM) % len))
+
+man ${all_execs[$choice]}
